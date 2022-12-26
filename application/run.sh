@@ -1,3 +1,3 @@
-service ssh start 
-cat /etc/ssh/sshd_config 
-sudo -u ctf node /app/runtime.js 
+service ssh start
+#run as user ctf node runtime.js using sudo
+sudo -u ctf node runtime.js
