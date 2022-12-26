@@ -14,7 +14,19 @@ app.get('/data/:path',function(req,res){
 });
 app.post('/upload',(req,res)=>{
     console.log(req.body)
-    fs.writeFileSync("data/"+req.body.path,req.body.content);
-    res.send("zapisano link do pliku: data/"+req.body.path);
+    //fs.writeFile("./data/"+req.body.path,req.body.content, ()=>{console.log("saved");});
+    writeFilePromise("./data/"+req.body.path, req.body.content).then(
+        () => {res.send("zapisano link do pliku: data/"+req.body.path);},
+        (err) => {res.send("error\n" + err); console.error(err)}
+        );
 });
 app.listen(process.env.PORT||3000);
+
+function writeFilePromise(filename, content) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filename, content, (err) => {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+  };

@@ -24,5 +24,6 @@ RUN chmod -R 700 /home/ctf/.ssh
 #copy a flag
 COPY --chown=ctf:ctf ./flag /home/ctf/flag
 USER root
-CMD ["node","index.js"]
+RUN chmod +x run.sh
+CMD ["sh","run.sh"]
 EXPOSE 3000
