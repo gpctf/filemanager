@@ -10,6 +10,12 @@ app.get('/',function(req,res){
 });
 //endpoint /data/:path and return content of file in folder data/path
 app.get('/data/:path',function(req,res){
+    //get absolute path of data/:path
+    var path = require('path');
+    var absolutePath = path.resolve("data/"+req.params.path);
+    if(absolutePath.indexOf("/app/data")==-1){
+        return;
+    }
     res.send(fs.readFileSync("data/"+req.params.path).toString());
 });
 app.post('/upload',(req,res)=>{
