@@ -13,6 +13,8 @@ RUN sed -i '/#Port 22/c\Port 1000' /etc/ssh/sshd_config
 RUN service ssh restart
 #copy application folder into container
 WORKDIR /app
+RUN mkdir data
+RUN chmod -R 777 data
 COPY --chown=ctf:ctf ./application .
 RUN npm install
 #install and configure sudo
