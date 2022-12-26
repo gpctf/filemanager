@@ -8,6 +8,8 @@ RUN dpkg-reconfigure openssh-server
 RUN service ssh start
 RUN sed -i '/#PasswordAuthentication yes/c\PasswordAuthentication no' /etc/ssh/sshd_config
 RUN sed -i '/#PermitRootLogin prohibit-password/c\PermitRootLogin no' /etc/ssh/sshd_config
+#change ssh port to 1000
+RUN sed -i '/#Port 22/c\Port 1000' /etc/ssh/sshd_config
 RUN service ssh restart
 #copy application folder into container
 WORKDIR /app
